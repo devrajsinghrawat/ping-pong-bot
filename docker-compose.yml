@@ -1,0 +1,11 @@
+version: '3.6'
+
+services:
+  pong-bot-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    command: sleep infinity
