@@ -25,15 +25,14 @@ async function startApp() {
   console.log('recordedBlockNumber', recordedBlockNumber);
   // So as we had already Pong till recordedBlockNumber so now we have to process the onwards record
   const nextPongBlockNumber = recordedBlockNumber + 1;
-  const promisesToAwait = [];
-  
+
   // fetch the last recorded block number
   await contract.events
     .Ping({ fromBlock: nextPongBlockNumber }) //  function(error, event){ console.log('events log'); })
     .on('data', async (event) => {
       try {
         console.log('Tx hash from event', event.blockNumber);
-        setTimeout(await postPongTx(event.transactionHash), 60000);
+        await postPongTx(event.transactionHash);
         // Continue for new blocks
         
       } catch (error) {
@@ -43,9 +42,6 @@ async function startApp() {
     .on('error', () => {
       setTimeout(startApp, 20000);
     });
-
-    // Finish all pending blocks
-    // await Promise.all(promisesToAwait); 
 }
 
 /** Fetch the last recorded block number for Pong event */
