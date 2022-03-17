@@ -32,13 +32,13 @@ async function startApp() {
     .on('data', async (event) => {
       try {
         console.log('Tx hash from event', event.blockNumber);
-        setTimeout(await postPongTx(event.transactionHash), 60000);
+        setTimeout(await postPongTx(event.transactionHash), 360000);   // 6 mins
       } catch (error) {
-        setTimeout(startApp, 20000);
+        setTimeout(startApp, 520000);   // 9 mins 
       }
     })
     .on('error', () => {
-      setTimeout(startApp, 20000);
+      setTimeout(startApp, 520000);     // 9 mins 
     });
 }
 
