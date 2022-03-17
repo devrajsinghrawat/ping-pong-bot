@@ -32,7 +32,7 @@ async function startApp() {
     .on('data', async (event) => {
       try {
         console.log('Tx hash from event', event.blockNumber);
-        setTimeout(await postPongTx(event.transactionHash), 520000);   // 6 mins
+        setTimeout(await postPongTx(event.transactionHash), 450000);   // approx 7 mins
       } catch (error) {
         setTimeout(startApp, 520000);   // 9 mins 
       }
