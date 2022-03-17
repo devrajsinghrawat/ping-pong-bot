@@ -32,9 +32,7 @@ async function startApp() {
     .on('data', async (event) => {
       try {
         console.log('Tx hash from event', event.blockNumber);
-        await postPongTx(event.transactionHash);
-        // Continue for new blocks
-        
+        setTimeout(await postPongTx(event.transactionHash), 60000);
       } catch (error) {
         setTimeout(startApp, 20000);
       }
@@ -116,7 +114,6 @@ const postPongTx = async (txHash) => {
     })
     .on('error', function (err) {
       console.log(err);
-      throw new Error();
     });
 };
 
